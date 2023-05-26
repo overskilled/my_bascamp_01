@@ -10,12 +10,13 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+*= require_tree
  *= require_self
  */
- 
+
 @import "bootstrap";
- @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 .wrapper {
   max-width: 1140px;
   padding-left: 1rem;
@@ -32,7 +33,7 @@
 
 a {
   text-decoration: none;
-  color: #222;
+  color: #3155ce;
 }
 
 html {
@@ -89,7 +90,7 @@ body {
   padding: 0.5rem;
 }
 
-html,body,div,span,applet,object,iframe,h1,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
+html,body,div,applet,object,iframe,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -228,4 +229,3 @@ table {
       @media (max-width: 799px) {
         .search__form input {
           border-bottom: 1px solid #979797; } }
-
