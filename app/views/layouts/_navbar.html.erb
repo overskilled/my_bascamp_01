@@ -11,6 +11,7 @@
         <li class="nav__item"><a href="#">About</a></li>
         <li class="nav__item"><a href="#">Services</a></li>
         <% if user_signed_in? %>
+            <li class="nav__item"><%= link_to 'Profile', user_path(1) %>
             <li class="nav__item"><%= link_to 'Edit account', edit_user_registration_path %></li>
             <li class="nav__item"><%= link_to 'Sign out', destroy_user_session_path,:method => :delete %></li>
         <%else%>
