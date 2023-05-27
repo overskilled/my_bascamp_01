@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   match '/users/:id' => 'home#show', via: :get
   get 'home/show'
   get 'users/:id', to: 'users#show', as: 'user'
+  #root to: "users#show"
   root to: "home#index"
   # Defines the root path route ("/")
   # root "articles#index"
