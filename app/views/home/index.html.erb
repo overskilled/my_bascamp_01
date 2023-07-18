@@ -1,6 +1,7 @@
 
 <body>
-    <h2>Welcome to BaseCamp</h2>
-    
+    <h2>Welcome to BaseCamp <%= link_to current_user.username, user_path(current_user.id) %></h2>
+    <p>You are a [<%= current_user.role %>]</p>
+    <%= link_to 'Grant admin permission', current_user.role = 1 %>
 </body>
 
