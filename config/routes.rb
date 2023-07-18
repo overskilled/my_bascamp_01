@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   match '/users/:id' => 'home#show', via: :get
   get 'home/show'
+  get 'toggle_role', to: 'user#set_role', as: 'toggle_role'
+
   get 'users/:id', to: 'users#show', as: 'user'
   #root to: "users#show"
   root to: "home#index"

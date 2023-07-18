@@ -2,5 +2,5 @@
 
    <%= @user.email %>
    <%= @user.id %>
-
+   <%= link_to "set to admin", user_set_role_path(@user), method: :put, data: { confirm: "Are you sure?" }%>
 </body>

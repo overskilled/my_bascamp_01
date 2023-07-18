@@ -9,16 +9,11 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def user_permission
-    @user = User.find(params[:id])
-    @user.role = 0
+  def set_role
+    @user = User.find(current_user.id)
+    @user.role = (@user.user?) ? 'admin' : 'user'
     @user.save
-  end
-
-  def admin_permission
-    @user = User.find(params[:id])
-    @user.role = 1
-    @user.save
+    redirect_to root_path
   end
 
 end
