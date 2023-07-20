@@ -1,6 +1,22 @@
-<body>
 
-   <%= @user.email %>
-   <%= @user.id %>
-   <%= link_to "set to admin", user_set_role_path(@user), method: :put, data: { confirm: "Are you sure?" }%>
-</body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyBasecamp1</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body>
+    <%= render "layouts/navbar" %>
+      <%= @user.email %>
+      <%= @user.id %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </body>
+</html>
+
+
