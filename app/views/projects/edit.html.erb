@@ -1,0 +1,80 @@
+<section class="create_project">
+            <h1>Edit project</h1>
+            <form class="inputs">
+                <div>
+                    <form action="editProjectName" method="post">
+                        <label>name</label>
+                        <div class="update">
+                            <input type="text" name="project_name" value="<%= $project.project_name %>" class="text_input" id="" value= required>
+                            <input class="update_button" type="submit" value="Update Name">
+                        </div>
+                    </form>
+                </div><br>
+                <div>
+                    <form action="editProjectDesc" method="post">
+                        <label>Description</label>
+                        <div class="update">
+                            <textarea class="textarea" name="description" cols="62" rows="2" class=""><%= $project.description %></textarea>
+                            <input class="update_button" type="submit" value="Update Description">
+                        </div>
+                    </form>
+                </div><br>
+                <div>
+                    <form action="editProjectCont" method="post">
+                        <label>Content</label>
+                        <div class="update">
+                            <textarea class="textarea" name="contents" cols="65" rows="4" class=""><%= $project.contents %></textarea>
+                            <input class="update_button" type="submit" value="Update Content">
+                        </div>
+                    </form>
+                </div><br>
+                <div style="width: 43rem;">
+                    <form method="post" action="addUser">
+                        <label>Add Member (email)</label>
+                        <div class="update">
+                            <input type="email" name="email" class="text_input" required>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="mySwitch" name="admin" value="yes" checked>
+                                <label class="form-check-label" for="mySwitch">Admin</label>
+                            </div>
+                            <button type="submit" class="btn  btn-primary"><img width="20px" src="https://img.icons8.com/ios-filled/50/000000/group-foreground-selected.png"/></button>
+                        </div>
+                    </form>
+                    <center>
+                    <form method="post" action="project" inputs>
+                        <input type="hidden" name="pid" value="<%= $project.id %>">
+                        <input class="submit" type="submit" value="Delete project" style="background: red">
+                    </form>
+                </center>
+                </div>
+                <div style="width: 50rem; background: white; border-radius: 10px;">
+                        <p style="text-align: center">All Members</p>
+                        <% if UserProjects.findMembers($project.id)!=[]%>
+                                    <% UserProjects.findMembers($project.id).each do |place| %>
+                        <div class="update">
+                            <p>  &nbsp; &nbsp; <%= place[0] %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= place[1] %>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <form method="post" action="updateUser">
+                            <div class="form-check form-switch">
+                                <% if place[3]!=1%>
+                                    <% if place[2]=="Admin" %>
+                                        <input type="hidden" name="email" value="<%= place[1] %>">
+                                        <input class="form-check-input" type="checkbox" id="mySwitch" name="admin" value="yes" checked>
+                                        <label class="form-check-label" for="mySwitch">Admin</label>
+                                        <button type="submit" class="btn  btn-primary">Update</button>
+                                    <% else %>
+                                        <input type="hidden" name="email" value="<%= place[1] %>">
+                                        <input class="form-check-input" type="checkbox" id="mySwitch" name="admin" value="yes">
+                                        <label class="form-check-label" for="mySwitch">Not Admin</label>
+                                        <button type="submit" class="btn  btn-primary">Update</button>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                            </form>
+                        </div>
+                                    <% end %>
+                                <% end %>
+                </div>
+            </form>
+        </section>
