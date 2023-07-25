@@ -29,6 +29,20 @@ class ProjectsController < ApplicationController
 
   end
 
+  def share
+    @project = Project.find(params[:id])
+    user_id = params[:user_id]
+    role = params[:role]
+
+    user = User.find(user_id)
+
+    # Create the association between the user and project with the specified role
+    @project.users << user
+    project_user = @project.project_users.find_by(user: user)
+    project_user.update(role: role)
+
+    redirect_to @project, notice: "Project shared with #{user.username}."
+  end
   protected
 
   def permitted_params

@@ -16,4 +16,19 @@ class UserController < ApplicationController
     redirect_to root_path
   end
 
+  def join_project
+    @user = User.find(params[:id])
+    project_id = params[:project_id]
+    role = params[:role]
+
+    project = Project.find(project_id)
+
+    # Create the association between the user and project with the specified role
+    @user.projects << project
+    project_user = project.project_users.find_by(user: @user)
+    project_user.update(role: role)
+
+    redirect_to @user, notice: "Joined project: #{project.name} with role: #{role.capitalize}."
+  end
+
 end
