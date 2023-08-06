@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
@@ -7,6 +7,15 @@ class UserController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @all_user_projects = @user.allUserProject(@user.id)
+    @created_by_me_projects = @user.createdByMe(@user.id)
+    @shared_with_me_projects = @user.sharedWithMe(@user.id)
+  end
+
+  def welcome
+    @user = current_user
+    @created_by_me_projects = @user.createdByMe(@user.id)
+    @shared_with_me_projects = @user.sharedWithMe(@user.id)
   end
 
   def set_role

@@ -1,8 +1,12 @@
-<h2>New Project</h2>
+<!-- app/views/projects/new.html.erb -->
+<h2>Create New Project</h2>
 
+<%= form_with(model: @project, url: projects_path) do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
 
-<%= simple_form_for @project do |f|%>
-    <%= f.input :name%><br>
-    <%= f.input :description%><br>
-    <%= f.button :submit %>
-<% end%>
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.submit "Create Project" %>
+<% end %>

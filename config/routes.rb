@@ -15,15 +15,15 @@ Rails.application.routes.draw do
     post 'join_project', on: :member
   end
 
-  get 'home/welcome', to: 'home#welcome', as: 'home_welcome'
-  get 'home/show' # Note: This route might be duplicated, consider removing it if not needed.
+  get 'users/welcome', to: 'users#welcome', as: 'home_welcome'
+  get 'users/show' # Note: This route might be duplicated, consider removing it if not needed.
 
 
-  get 'users/:id', to: 'home#show'
+  #get 'users/:id', to: 'users#welcome' as: :user
 
   # Add the 'toggle_role' route, assuming it's related to user roles
-  get 'toggle_role', to: 'home#user_set_role_path', as: 'toggle_role'
+  get 'toggle_role', to: 'users#user_set_role_path', as: 'toggle_role'
 
   # Root route
-  root to: "home#index"
+  root to: "users#index"
 end

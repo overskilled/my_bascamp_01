@@ -1,0 +1,66 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyBasecamp1</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body>
+    <%= render "layouts/navbar" %>
+        <p class="notice"><%= notice %></p>
+        <p>You are a [<%= current_user.role %>]</p>
+        <% if current_user.admin? %>
+        There are <%= User.count %> user in the system
+        <% end %>
+        <p class="alert"><%= alert %></p>
+    
+
+  <section class="container">
+  <center>
+  <h2 class="title">PROJECTS</h2>
+  <hr>
+  <h3>Projects Created by You</h3>
+  <div class="row">
+    <% @created_by_me_projects.each do |project| %>
+      <div class="col-sm">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= project.name %></h5>
+            <p class="card-text"><%= project.description %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <hr>
+  <h3>Projects Shared with You</h3>
+  <div class="row">
+    <% @shared_with_me_projects.each do |project| %>
+      <div class="col-sm">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= project.name %></h5>
+            <p class="card-text"><%= project.description %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+  </center>
+</section>
+
+    </div>
+
+
+    <%= yield %>
+  </body>
+</html>
+
+

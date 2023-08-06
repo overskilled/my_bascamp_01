@@ -51,6 +51,8 @@
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Login to your account</span>
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                            <%= render "devise/shared/error_messages", resource: resource %>
+
               <div class="field padding-bottom--24">
                 <%= f.label :email %><br />
                 <%= f.email_field :email, autofocus: true, autocomplete: "email",

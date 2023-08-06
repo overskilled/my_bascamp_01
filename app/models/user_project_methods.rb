@@ -1,11 +1,4 @@
-class ProjectUser < ApplicationRecord
-  belongs_to :user
-  belongs_to :project
-
-  # Add the 'role' attribute as an enum
-  enum role: { user: 0, admin: 1 }
-
-  # Method to fetch all users associated with this project
+module UserProjectMethods
   def allUserProject(user_id)
     # Fetch all projects associated with the user
     Project.joins(:project_users).where('project_users.user_id = ?', user_id)

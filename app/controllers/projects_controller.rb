@@ -5,7 +5,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project = Project.find(params[:id]);
+    @shared_users = @project.users
   end
 
   def new
@@ -14,8 +15,10 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(permitted_params)
-    if (@project.save)
-      redirect_to project_path(@project)
+    @project.creator = current_user
+
+    if @project.save
+      redirect_to project_path(@project), notice: "Project created successfully."
     else
       render :new
     end
@@ -31,18 +34,19 @@ class ProjectsController < ApplicationController
 
   def share
     @project = Project.find(params[:id])
-    user_id = params[:user_id]
+    user = User.find(params[:user_id])
     role = params[:role]
 
-    user = User.find(user_id)
-
-    # Create the association between the user and project with the specified role
-    @project.users << user
-    project_user = @project.project_users.find_by(user: user)
-    project_user.update(role: role)
-
-    redirect_to @project, notice: "Project shared with #{user.username}."
+    if role == "admin" || role == "user"
+      @project.users << user
+      project_user = @project.project_users.find_by(user: user)
+      project_user.update(role: role)
+      redirect_to @project, notice: "Project shared with #{user.username} as a #{role}."
+    else
+      redirect_to @project, alert: "Invalid role. Please select 'admin' or 'user'."
+    end
   end
+
   protected
 
   def permitted_params
