@@ -11,52 +11,25 @@
   </head>
 
   <body>
-    <%= render "layouts/navbar" %>
-        <p class="notice"><%= notice %></p>
-        <p>You are a [<%= current_user.role %>]</p>
-        <% if current_user.admin? %>
-        There are <%= User.count %> user in the system
-        <% end %>
-        <p class="alert"><%= alert %></p>
     
-
-  <section class="container">
-  <center>
-  <h2 class="title">PROJECTS</h2>
-  <hr>
-  <h3>Projects Created by You</h3>
-  <div class="row">
-    <% @created_by_me_projects.each do |project| %>
-      <div class="col-sm">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title"><%= project.name %></h5>
-            <p class="card-text"><%= project.description %></p>
-          </div>
-        </div>
-      </div>
+    <p>You are a [<%= current_user.role %>]</p>
+    <% if current_user.admin? %>
+    There are <%= User.count %> user in the system
     <% end %>
-  </div>
+    <p class="alert"><%= alert %></p>
 
-  <hr>
-  <h3>Projects Shared with You</h3>
-  <div class="row">
-    <% @shared_with_me_projects.each do |project| %>
-      <div class="col-sm">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title"><%= project.name %></h5>
-            <p class="card-text"><%= project.description %></p>
-          </div>
+
+    <section class="container">
+      <h2 class='title'>PROJECTS</h2>
+      <hr>
+      <center>
+        <div class="row">
+          <%= render partial: 'projects/all_projects', locals: { all_projects: @all_projects } %>
+          <%= render partial: 'projects/created_by_me', locals: { created_by_me_projects: @created_by_me_projects } %>
+          <%= render partial: 'projects/shared_with_me', locals: { shared_with_me_projects: @shared_with_me_projects } %>
         </div>
-      </div>
-    <% end %>
-  </div>
-</section>
-  </center>
-</section>
-
-    </div>
+      </center>
+    </section>
 
 
     <%= yield %>

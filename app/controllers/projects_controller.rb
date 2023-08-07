@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+    @projects = current_user.allUserProject
   end
 
   def show
@@ -31,6 +32,26 @@ class ProjectsController < ApplicationController
   def update
 
   end
+
+  def add_user
+    @project = Project.find(params[:project_id])
+    user = User.find_by(email: params[:email])
+    role = params[:admin] == "yes" ? "admin" : "user"
+
+    if user
+      if @project.users.include?(user)
+        redirect_to @project, alert: "#{user.username} is already a member of the project."
+      else
+        @project.users << user
+        project_user = @project.project_users.find_by(user: user)
+        project_user.update(role: role)
+        redirect_to @project, notice: "#{user.username} has been added to the project as a #{role}."
+      end
+    else
+      redirect_to @project, alert: "User with the provided email not found."
+    end
+  end
+
 
   def share
     @project = Project.find(params[:id])

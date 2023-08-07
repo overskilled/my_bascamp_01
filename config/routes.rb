@@ -8,7 +8,13 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   resources :projects do
-    post 'share', on: :member
+    member do
+      post 'share'
+      post 'edit_project_name'
+      post 'edit_project_desc'
+      post 'add_user'
+      post 'update_user'
+    end
   end
 
   resources :user do

@@ -7,6 +7,7 @@ class User < ApplicationRecord
   #Associations
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
+  #has_and_belongs_to_many :projects
 
   include UserProjectMethods
 
@@ -14,5 +15,9 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
   def set_default_role
     self.role ||= :user
+  end
+
+  def project_count
+    projects.count
   end
 end

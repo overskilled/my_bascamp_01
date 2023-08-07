@@ -1,7 +1,7 @@
 module UserProjectMethods
   def allUserProject(user_id)
     # Fetch all projects associated with the user
-    Project.joins(:project_users).where('project_users.user_id = ?', user_id)
+    Project.where('project_users.user_id = ? OR (projects.creator_id = ? AND project_users.role = ?)', id, id, 'admin')
   end
 
   def createdByMe(user_id)

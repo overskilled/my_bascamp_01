@@ -1,24 +1,25 @@
 class Project < ApplicationRecord
   include UserProjectMethods
+  include UserProjects
 
   #Associations
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
   belongs_to :creator, class_name: 'User', foreign_key: 'creator_id'
+  #has_and_belongs_to_many :users
 
-  # Method to fetch all users associated with this project
-  def allUserProject(user_id)
-    # Fetch all projects associated with the user
-    Project.joins(:project_users).where('project_users.user_id = ?', user_id)
-  end
+    # Method to fetch all projects associated with a specific user
+    def self.allUserProject(user_id)
+      joins(:users).where(users: { id: user_id })
+    end
 
-  def createdByMe(user_id)
-    # Fetch projects created by the user
-    Project.where(creator_id: user_id)
-  end
+    # Method to fetch projects created by a specific user
+    def self.createdByMe(user_id)
+      where(creator_id: user_id)
+    end
 
-  def sharedWithMe(user_id)
-    # Fetch projects shared with the user (excluding the projects created by the user)
-    Project.joins(:project_users).where('project_users.user_id = ? AND project_users.role = ?', user_id, 'user')
-  end
+    # Method to fetch projects shared with a specific user (excluding projects created by the user)
+    def self.sharedWithMe(user_id)
+      joins(:users).where.not(creator_id: user_id).where(users: { id: user_id })
+    end
 end

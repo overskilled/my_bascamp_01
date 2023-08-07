@@ -14,9 +14,12 @@ class UsersController < ApplicationController
 
   def welcome
     @user = current_user
+    @all_user_projects = @user.allUserProject(@user.id)
     @created_by_me_projects = @user.createdByMe(@user.id)
     @shared_with_me_projects = @user.sharedWithMe(@user.id)
+    @projects = @user.createdByMe(@user.id) + @user.project_users.joins(:project).where.not(projects: { creator_id: @user.id }).map(&:project)
   end
+  
 
   def set_role
     @user = User.find(current_user.id)
