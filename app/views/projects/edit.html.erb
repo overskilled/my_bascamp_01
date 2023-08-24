@@ -1,37 +1,28 @@
+
+  <center><h1>Edit project</h1></center><br>
+
+  <%= bootstrap_form_with model: @project, url: project_path(@project), method: :patch, local: true do |f| %>
+  <div class="card mx-auto mg-10" style="width: 800px;">
+    <div class="card-body mg-5">
+      <div class="mb-3">
+        <%= f.text_field :name %><br>
+      </div>
+      <div class="mb-3">
+        <%= f.text_area :description %><br>
+      </div>
+      <div class="col text-center">
+        <%= f.submit %>
+      <div>
+    </div>
+  </div>
+  <% end %><br>
+
 <section class="create_project">
-  <h1>Edit project</h1>
-  <form class="inputs">
-    <div>
-      <form method="post" action="<%= edit_project_name_project_path(@project) %>">
-        <label>Name</label>
-        <div class="update">
-          <input type="text" name="project_name" value="<%= @project.name %>" class="text_input" required>
-          <input class="update_button" type="submit" value="Update Name">
-        </div>
-      </form>
-    </div><br>
-    <div>
-      <form method="post" action="<%= edit_project_desc_project_path(@project) %>">
-        <label>Description</label>
-        <div class="update">
-          <textarea class="textarea" name="description" cols="62" rows="2" class="" required><%= @project.description %></textarea>
-          <input class="update_button" type="submit" value="Update Description">
-        </div>
-      </form>
-    </div><br>
     <div style="width: 43rem;">
+    <%= bootstrap_form_with model: @project, url: project_path(@project), method: :patch, local: true do |f| %>
+
+    <% end %>
     <!--
-        <%= form_with(url: add_user_project_path(@project), method: :post) do |form| %>
-            <%= form.label :email, "Add Member (email)" %>
-            <%= form.email_field :email, required: true %>
-
-            <div class="form-check form-switch">
-                <%= form.check_box :admin, class: "form-check-input", id: "mySwitch", value: "yes" %>
-                <%= form.label :admin, "Admin", class: "form-check-label", for: "mySwitch" %>
-            </div>
-
-            <%= form.submit "Add User", class: "btn btn-primary" %>
-        <% end %>-->
       <form method="post" action="<%= add_user_project_path(@project) %>">
         <label>Add Member (email)</label>
         <div class="update">
@@ -44,14 +35,14 @@
             <img width="20px" src="https://img.icons8.com/ios-filled/50/000000/group-foreground-selected.png"/>
           </button>
         </div>
-      </form>
+      </form>-->
       <center>
         <form method="post" action="<%= project_path(@project) %>" inputs>
           <input type="hidden" name="_method" value="delete">
           <input class="submit" type="submit" value="Delete project" style="background: red">
         </form>
-      </center>
-    </div>
+      </center><br>
+    </div><br>
         <div style="width: 50rem; background: white; border-radius: 10px;">
     <p style="text-align: center">All Members</p>
     <% if @members.present? %>

@@ -14,8 +14,11 @@ Rails.application.routes.draw do
       post 'edit_project_desc'
       post 'add_user'
       post 'update_user'
+      delete 'delete'
     end
   end
+
+  patch 'projects/:id', to: 'projects#update'
 
   resources :user do
     post 'join_project', on: :member

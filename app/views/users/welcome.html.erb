@@ -7,18 +7,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application'%>
   </head>
 
   <body>
-    
-    <p>You are a [<%= current_user.role %>]</p>
-    <% if current_user.admin? %>
-    There are <%= User.count %> user in the system
-    <% end %>
-    <p class="alert"><%= alert %></p>
-
-
     <section class="container">
       <h2 class='title'>PROJECTS</h2>
       <hr>

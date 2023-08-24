@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
+
 
   def index
-
+    render layout: false
   end
 
   def show
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     @shared_with_me_projects = @user.sharedWithMe(@user.id)
     @projects = @user.createdByMe(@user.id) + @user.project_users.joins(:project).where.not(projects: { creator_id: @user.id }).map(&:project)
   end
-  
+
 
   def set_role
     @user = User.find(current_user.id)
@@ -39,8 +40,8 @@ class UsersController < ApplicationController
     @user.projects << project
     project_user = project.project_users.find_by(user: @user)
     project_user.update(role: role)
-
-    redirect_to @user, notice: "Joined project: #{project.name} with role: #{role.capitalize}."
+    flash[:primary] = "Joined project: #{project.name} with role: #{role.capitalize}."
+    redirect_to @user
   end
 
 end

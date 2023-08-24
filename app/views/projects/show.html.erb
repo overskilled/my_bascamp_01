@@ -1,46 +1,34 @@
-
-
-    <section class="container">
+  <section class="container">
         <hr>
         <h5 class='title' style="text-transform: uppercase;"><%= @project.name %></h5>
         <hr>
 
         <!-- --><center>
         <div class="card" style="width: 70%;" >
-            <div class="card-bod
+            <div class="card-body">
                 <h6 class="card-title space">
                 <label> Project creator | <%= @project.name%></label>
                 <%= link_to edit_project_path(@project) do %>
                     <%= image_tag 'https://img.icons8.com/windows/32/000000/settings--v1.png', alt: @project.name %>
                 <% end %>
                 </h6>
-
                 <hr>
                 <h6 class="card-subtitle mb-2 text-muted"> Description </h6>
                 <p class="card-text"> <%= @project.description %> </p>
-                
+                <hr>
                 <div style="width: 43rem;text-align: left;">
-                    <label style="text-align: left; color: #4dccbd">All Members</lab
+                    <label style="text-align: left; color: #4dccbd">All Members</label>
                 </div>
                 <div class="buttom space">
                     <label>
                         <img width="20px" src="https://img.icons8.com/ios-filled/50/000000/group-foreground-selected.png"/>
-                        <span></span>
+                        <span>1</span>
                     </label>
-                    <form method="post" action="project">
-                        <input type="hidden" name="pid" value=<%= @project.id %>>
-                        <button type="submit" class="btn btn-danger">
-                            <img width="20px" src="https://img.icons8.com/wired/64/000000/filled-trash.png"/>
-                        </button>
-                    </form>
+                      <%= button_to image_tag("https://img.icons8.com/wired/64/000000/filled-trash.png", width: "20px"), delete_project_path(@project), method: :delete, class: "btn btn-danger" %>
+
                 </div>
             </div>
         </div>
         </center>
 
     </section>
-
-
-
-
-

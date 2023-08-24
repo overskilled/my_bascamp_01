@@ -45,7 +45,12 @@ gem "haml"
 
 gem 'bootstrap', '~> 5.3.0.alpha3'
 
+gem "bootstrap_form", "~> 5.2"
+
 gem 'jquery-rails'
+
+gem 'sass-rails'
+
 
 gem 'simple_form'
 

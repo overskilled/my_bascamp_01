@@ -1,12 +1,16 @@
-<!-- app/views/projects/new.html.erb -->
-<h2>Create New Project</h2>
+<section class="create_project">
+  <h1>Add new project</h1>
+  <hr>
+  <%= form_with(model: @project, url: projects_path, html: { class: 'inputs' }) do |form| %>
+    <div>
+      <%= form.label :name %><br>
+      <%= form.text_field :name, class: 'text_input', required: true %>
+    </div><br>
+    <div>
+      <%= form.label :description %><br>
+      <br><%= form.text_area :description, class: 'textarea', cols: 50, rows: 3 %>
+    </div><br>
+    <center><%= form.submit "Create project", class: 'btn btn-primary'%></center>
+  <% end %>
+</section>
 
-<%= form_with(model: @project, url: projects_path) do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-
-  <%= form.label :description %>
-  <%= form.text_area :description %>
-
-  <%= form.submit "Create Project" %>
-<% end %>

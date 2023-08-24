@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.all
+    #@projects = Project.all
     @projects = current_user.allUserProject
   end
 
@@ -19,7 +19,8 @@ class ProjectsController < ApplicationController
     @project.creator = current_user
 
     if @project.save
-      redirect_to project_path(@project), notice: "Project created successfully."
+      flash[:primary] = "Project created successfully."
+      redirect_to project_path(@project)
     else
       render :new
     end
@@ -30,7 +31,14 @@ class ProjectsController < ApplicationController
   end
 
   def update
-
+    @project = Project.find(params[:id])
+    if @project.update(params.require(:project).permit(:name, :description))
+      flash[:success] = "Project successfully updated!"
+      redirect_to project_path(@project)
+    else
+      flash.now[:error] = "Project update failed"
+      render :edit
+    end
   end
 
   def add_user
@@ -66,6 +74,12 @@ class ProjectsController < ApplicationController
     else
       redirect_to @project, alert: "Invalid role. Please select 'admin' or 'user'."
     end
+  end
+
+  def delete
+    @project = Project.find(params[:id])
+    @project.destroy
+    redirect_to home_welcome_path, notice: "Project deleted successfully."
   end
 
   protected
