@@ -1,7 +1,9 @@
 module UserProjectMethods
+
   def allUserProject(user_id)
     # Fetch all projects associated with the user
-    Project.where('project_users.user_id = ? OR (projects.creator_id = ? AND project_users.role = ?)', id, id, 'admin')
+    Project.where('projects.creator_id = :user_id OR (project_users.user_id = :user_id AND projects.creator_id <> :user_id)',
+                user_id: user_id)
   end
 
   def createdByMe(user_id)
@@ -11,6 +13,6 @@ module UserProjectMethods
 
   def sharedWithMe(user_id)
     # Fetch projects shared with the user (excluding the projects created by the user)
-    Project.joins(:project_users).where('project_users.user_id = ? AND project_users.role = ?', user_id, 'user')
+    Project.joins(:project_users).where('project_users.user_id = ? AND projects.creator_id <> ?', user_id, user_id)
   end
 end

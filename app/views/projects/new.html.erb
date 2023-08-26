@@ -9,6 +9,7 @@
     <div>
       <%= form.label :description %><br>
       <br><%= form.text_area :description, class: 'textarea', cols: 50, rows: 3 %>
+      <%= form.hidden_field :creator_id, value: current_user.id %>
     </div><br>
     <center><%= form.submit "Create project", class: 'btn btn-primary'%></center>
   <% end %>

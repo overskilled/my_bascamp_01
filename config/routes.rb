@@ -15,8 +15,11 @@ Rails.application.routes.draw do
       post 'add_user'
       post 'update_user'
       delete 'delete'
+      post 'change_role'
     end
   end
+
+  post '/projects/:id/update_role', to: 'projects#update_role', as: :update_role_project
 
   patch 'projects/:id', to: 'projects#update'
 

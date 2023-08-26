@@ -7,7 +7,7 @@
         <div class="card" style="width: 70%;" >
             <div class="card-body">
                 <h6 class="card-title space">
-                <label> Project creator | <%= @project.name%></label>
+                <label> <%= @project.creator.username %> | <%= @project.name%></label>
                 <%= link_to edit_project_path(@project) do %>
                     <%= image_tag 'https://img.icons8.com/windows/32/000000/settings--v1.png', alt: @project.name %>
                 <% end %>
@@ -16,9 +16,16 @@
                 <h6 class="card-subtitle mb-2 text-muted"> Description </h6>
                 <p class="card-text"> <%= @project.description %> </p>
                 <hr>
-                <div style="width: 43rem;text-align: left;">
-                    <label style="text-align: left; color: #4dccbd">All Members</label>
-                </div>
+                </form>
+                <div style="width: 43rem; text-align: left;">
+                    <label style="text-align: left; color: #4dccbd">All Members</label><br>
+                    <% @project.project_users.each do |project_user| %><br>
+                    <% user = project_user.user %>
+                    <div class="update" style="text-align: left">
+                        <p><%= user.username %> &nbsp; &nbsp; <%= user.email %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label style="text-align: left;"><%= project_user.role %></label></p>
+                    </div>
+                    <% end %>
+                </div><br>
                 <div class="buttom space">
                     <label>
                         <img width="20px" src="https://img.icons8.com/ios-filled/50/000000/group-foreground-selected.png"/>
