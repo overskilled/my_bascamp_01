@@ -1,0 +1,31 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyBasecamp1</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application'%>
+  </head>
+
+  <body>
+    <section class="container">
+      <h2 class='title'>PROJECTS</h2>
+      <hr>
+      <center>
+        <div class="row">
+          <%= render partial: 'projects/all_projects', locals: { all_projects: @all_projects } %>
+          <%= render partial: 'projects/created_by_me', locals: { created_by_me_projects: @created_by_me_projects } %>
+          <%= render partial: 'projects/shared_with_me', locals: { shared_with_me_projects: @shared_with_me_projects } %>
+        </div>
+      </center>
+    </section>
+
+
+    <%= yield %>
+  </body>
+</html>
+
+

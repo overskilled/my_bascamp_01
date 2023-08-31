@@ -1,0 +1,25 @@
+
+<header class="site-header">
+  <div class="wrapper site-header__wrapper">
+    <a href="#" class="brand">My Basecamp</a>
+    <nav class="nav">
+      <button class="nav__toggle" aria-expanded="false" type="button">
+        menu
+      </button>
+      <ul class="nav__wrapper">
+        <li class="nav__item"><%= link_to "Home", home_welcome_path %>
+        <li class="nav__item"><%= link_to 'Add new project', new_project_path%></li>
+
+        <% if user_signed_in? %>
+            <li class="nav__item"><%= link_to 'Profile', user_path(current_user.id) %>
+            <li class="nav__item"><%= link_to 'Edit account', edit_user_registration_path %></li>
+            <li class="nav__item"><%= link_to 'Sign out', destroy_user_session_path,:method => :delete %></li>
+        <%else%>
+            <li class="nav__item"><%= link_to "Login", new_user_session_path %>
+            <li class="nav__item"><%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
+
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,13 @@
+<div class="col-sm">
+  <h5 class="top">
+    <img width="20px" src="https://img.icons8.com/ios/50/000000/ball-point-pen.png"/>
+    Created by me
+  </h5><br>
+  <% if @created_by_me_projects.present? %>
+    <% @created_by_me_projects.each do |project| %>
+      <%= render partial: 'projects/project_card', locals: { project: project } %>
+    <% end %>
+  <% else %>
+    <p>No projects created by you.</p>
+  <% end %>
+</div>

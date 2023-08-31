@@ -1,0 +1,67 @@
+<center>
+  <h1>Edit Project</h1>
+</center>
+<br>
+
+<%= bootstrap_form_with model: @project, url: project_path(@project), method: :patch, local: true do |f| %>
+  <div class="card mx-auto mg-10" style="width: 800px;">
+    <div class="card-body mg-5">
+      <div class="mb-3">
+        <%= f.text_field :name %><br>
+      </div>
+      <div class="mb-3">
+        <%= f.text_area :description %><br>
+      </div>
+      <div class="col text-center">
+        <%= f.submit %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<br>
+
+<section class="create_project">
+  <div style="width: 43rem;">
+    <%= bootstrap_form_with(url: add_user_project_path(@project), method: :post) do |form| %>
+      <div class="form-group">
+        <%= form.email_field :email, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <%= form.select :role, { 'Admin' => 'admin', 'User' => 'user' }, class: 'form-control', required: true %>
+      </div>
+      <%= form.submit 'Add User', class: 'btn btn-primary' %>
+    <% end %>
+    <br>
+
+    <div style="width: 50rem; background: white; border-radius: 10px;">
+      <div style="width: 43rem; text-align: left;">
+        <label style="text-align: left; color: #4dccbd">All Members</label><br>
+        <% @project.project_users.each do |project_user| %><br>
+          <% user = project_user.user %>
+          <div class="update" style="text-align: center">
+            <p>
+              <%= user.username %>
+              &nbsp; &nbsp; <%= user.email %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <label style="text-align: left;"><%= project_user.role %></label>
+              <% if project_user.role == 'user' %>
+                <% if user.id != @project.creator_id %>
+                  <%= button_to "Promote to Admin", update_role_project_path(@project, user_id: user.id, role: 'admin'), method: :post, class: "btn btn-success btn-sm" %>
+                <% end %>
+              <% else %>
+                <% if user.id != @project.creator_id %>
+                  <%= button_to "Demote to User", update_role_project_path(@project, user_id: user.id, role: 'user'), method: :post, class: "btn btn-warning btn-sm" %>
+                <% end %>
+              <% end %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+      <br><br>
+      <div class="text-center">
+        <%= button_to "Delete project", delete_project_path(@project), method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</section>
+
